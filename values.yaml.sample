@@ -12,7 +12,7 @@ env:
     opensslVerifyMode: "none"
     domain: "YOUR_SERVER_DOMAIN"
   assets: {}
-  # paperclipRootPath: "/var/lib/mastodon/public-system"
+  # paperclipRootPath: "/var/lib/opt/mastodon/public-system"
   # paperclipRootUrl: "system"
   # cdnHost: "assets.example.com"
   s3: {}

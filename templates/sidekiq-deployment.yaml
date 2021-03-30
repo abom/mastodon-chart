@@ -31,7 +31,7 @@ spec:
           - exec
           - sidekiq
           - -c
-          - "{{ .Values.sidekiq.parallelism }}"
+          - "{{ .Values.sidekiq.defaultQparallelism }}"
           - -q
           - default
           - -q
@@ -48,9 +48,9 @@ spec:
 {{ toYaml .Values.sidekiq.resources | indent 10 }}
         volumeMounts:
         - name: assets
-          mountPath: /mastodon/public/assets
+          mountPath: /opt/mastodon/public/assets
         - name: system
-          mountPath: /mastodon/public/system
+          mountPath: /opt/mastodon/public/system
       volumes:
       - name: assets
         persistentVolumeClaim:

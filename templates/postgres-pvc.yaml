@@ -1,5 +1,24 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "{{ include "postgres.fullname" . }}-postgres"
+  labels:
+    backupType: {{ .Values.threefoldVdc.backup | quote }}
+spec:
+  capacity:
+    storage: {{ .Values.postgres.persistentVolume.size | quote }}
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .Values.postgres.persistentVolume.accessMode | quote }}
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: ""
+  hostPath:
+    path: {{ .Values.postgres.persistentVolume.hostPath }}
+    type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: {{ template "postgres.fullname" . }}
   labels:
@@ -14,3 +33,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.postgres.persistentVolume.size | quote }}
+  storageClassName: ""
+  volumeName: "{{ include "postgres.fullname" . }}-postgres"

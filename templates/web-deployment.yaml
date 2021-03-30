@@ -44,9 +44,9 @@ spec:
 {{ toYaml .Values.web.resources | indent 10 }}
         volumeMounts:
         - name: assets
-          mountPath: /mastodon/public/assets
+          mountPath: /opt/mastodon/public/assets
         - name: system
-          mountPath: /mastodon/public/system
+          mountPath: /opt/mastodon/public/system
       volumes:
       - name: system
         persistentVolumeClaim:

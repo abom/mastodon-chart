@@ -2,6 +2,8 @@
 Production environment for mastodon
 */}}
 {{- define "productonEnvironment" -}}
+- name: DISABLE_DATABASE_ENVIRONMENT_CHECK
+  value: "1"
 - name: REDIS_HOST
   value: "{{ template "redis.fullname" . }}"
 - name: REDIS_PORT

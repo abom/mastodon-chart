@@ -36,7 +36,7 @@ spec:
 {{ include "productonEnvironment" . | indent 8 }}
         volumeMounts:
         - name: assets
-          mountPath: /mastodon/public/assets
+          mountPath: /opt/mastodon/public/assets
       volumes:
       - name: assets
         persistentVolumeClaim:

@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "{{ include "web.fullname" . }}-web-system"
+  name: "{{ include "web.fullname" . }}-web-assets"
   labels:
     backupType: {{ .Values.threefoldVdc.backup | quote }}
 spec:
   capacity:
-    storage: {{ .Values.web.persistentVolume.system.size | quote }}
+    storage: {{ .Values.web.persistentVolume.assets.size | quote }}
   volumeMode: Filesystem
   accessModes:
-    - {{ .Values.web.persistentVolume.system.accessMode | quote }}
+    - {{ .Values.web.persistentVolume.assets.accessMode | quote }}
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: ""
   hostPath:
-    path: {{ .Values.web.persistentVolume.system.hostPath }}
+    path: {{ .Values.web.persistentVolume.assets.hostPath }}
     type: DirectoryOrCreate
 
 ---
@@ -26,12 +26,12 @@ metadata:
     component: "{{ .Values.web.name }}"
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-  name: {{ template "web.fullname" . }}-system
+  name: {{ template "web.fullname" . }}-assets
 spec:
   accessModes:
-    - {{ .Values.web.persistentVolume.system.accessMode | quote }}
+    - {{ .Values.web.persistentVolume.assets.accessMode | quote }}
   resources:
     requests:
-      storage: "{{ .Values.web.persistentVolume.system.size }}"
+      storage: "{{ .Values.web.persistentVolume.assets.size }}"
   storageClassName: ""
-  volumeName: "{{ include "web.fullname" . }}-web-system"
+  volumeName: "{{ include "web.fullname" . }}-web-assets"
